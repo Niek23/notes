@@ -24,8 +24,7 @@ urlpatterns = [
 
     # Vue urls
     path('', lambda request: HttpResponse(render(request, 'vue_index.html'))),
-    path('another-path/', lambda request: HttpResponse(render(request, 'vue_index.html'))),
 
     # board app
-    path('api/', include('board.urls'))
+    path(r'api/', include('board.urls'))
 ]
