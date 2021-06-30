@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'notes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': env('DB_ENGINE'),
-        'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
+        'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': env('DB_HOST'), 
