@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+from django.shortcuts import render
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Vue urls
+    path('', lambda request: HttpResponse(render(request, 'vue_index.html'))),
+    path('another-path/', lambda request: HttpResponse(render(request, 'vue_index.html'))),
 ]
