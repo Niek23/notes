@@ -36,12 +36,17 @@ export default {
       );
     },
     addNote: function() {
+      axios.post('http://127.0.0.1:5000/create_notification/', {message: this.newNote})
       axios.post('/api/notes/', {text: this.newNote}).then(
         response => {
           this.newNote = "";
           this.notes.push(response.data);
         }
-      );
+      )
+      
+    },
+    sendNotification: function() {
+      axios.get('http://127.0.0.1:5000/create_notification/', {message: this.newNote})
     }
   },
   created() {
