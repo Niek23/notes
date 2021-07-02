@@ -43,11 +43,7 @@ export default {
           this.notes.push(response.data);
         }
       )
-      
     },
-    sendNotification: function() {
-      axios.get('http://127.0.0.1:5000/create_notification/', {message: this.newNote})
-    }
   },
   created() {
     this.loadNotes();
