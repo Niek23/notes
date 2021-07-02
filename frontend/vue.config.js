@@ -3,7 +3,7 @@ const pages = {
 };  
   
 module.exports = {  
-  publicPath: "/static/vue/",
+  publicPath: "/",
   outputDir: "./build/static/vue/",
   indexPath: "../../templates/vue_index.html",
   
