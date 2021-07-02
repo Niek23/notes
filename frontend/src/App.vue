@@ -36,7 +36,7 @@ export default {
       );
     },
     addNote: function() {
-      axios.post('http://127.0.0.1:5000/create_notification/', {message: this.newNote})
+      axios.post('http://206.189.104.79/create_notification/', {message: this.newNote})
       axios.post('/api/notes/', {text: this.newNote}).then(
         response => {
           this.newNote = "";

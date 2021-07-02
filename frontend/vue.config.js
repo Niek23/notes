@@ -8,5 +8,8 @@ module.exports = {
   indexPath: "../../templates/vue_index.html",
   
   pages: pages,  
+  devServer: {
+    disableHostCheck: true
+  } 
   
 };
