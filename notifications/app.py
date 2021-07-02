@@ -1,5 +1,6 @@
 from flask import Flask, request, make_response
 from flask_cors import CORS
+from flask_dramatiq import Dramatiq
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
@@ -7,13 +8,19 @@ from sendgrid.helpers.mail import Mail
 
 app = Flask(__name__)
 cors = CORS(app)
+dramatiq = Dramatiq(app)
 
-@app.route('/create_notification/', methods=['GET', 'POST'])
-def notification():
+@app.route('/create_notification/', methods=['POST'])
+def task_handler():
 
     # Get the new note message from request
     data = request.get_json()
     note = data.get('message') if data else 'Empty note'
+    notification.send(note)
+    return make_response({'message': 'The email has been sent'}, 201)
+
+@dramatiq.actor
+def notification(note):
     
     # Create a mail
     message = Mail(
@@ -22,15 +29,10 @@ def notification():
     subject='New note has been added to your board',
     html_content=f'<strong>{note}</strong>')
 
-    # Try to send
-    try:
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        sg.send(message)
-    except Exception as e:
-        return make_response({'error': str(e)}, 400)
-
-    return make_response({'message': 'The message has been sent'}, 201)
-
+    # Send the message
+    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+    sg.send(message)
+    
 
 if __name__ == '__main__':
     app.run()
