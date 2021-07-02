@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     loadNotes: function() {
-      axios.get('/api/notes/').then(
+      axios.get('http://167.99.213.62/api/notes/').then(
         response => {
           this.notes = response.data;
         }
@@ -37,7 +37,7 @@ export default {
     },
     addNote: function() {
       axios.post('http://206.189.104.79/create_notification/', {message: this.newNote})
-      axios.post('/api/notes/', {text: this.newNote}).then(
+      axios.post('http://167.99.213.62/api/notes/', {text: this.newNote}).then(
         response => {
           this.newNote = "";
           this.notes.push(response.data);
