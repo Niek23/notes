@@ -29,15 +29,15 @@ export default {
   },
   methods: {
     loadNotes: function() {
-      axios.get('http://167.99.213.62/api/notes/').then(
+      axios.get('https://api.hellosend.cloud/api/notes/').then(
         response => {
           this.notes = response.data;
         }
       );
     },
     addNote: function() {
-      axios.post('http://206.189.104.79/create_notification/', {message: this.newNote})
-      axios.post('http://167.99.213.62/api/notes/', {text: this.newNote}).then(
+      axios.post('https://notifications.hellosend.cloud/create_notification', {message: this.newNote})
+      axios.post('https://api.hellosend.cloud/api/notes/', {text: this.newNote}).then(
         response => {
           this.newNote = "";
           this.notes.push(response.data);
