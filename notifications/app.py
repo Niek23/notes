@@ -11,16 +11,18 @@ cors = CORS(app)
 dramatiq = Dramatiq(app)
 
 @app.route('/create_notification/', methods=['POST'])
-def task_handler():
+def notification():
 
     # Get the new note message from request
     data = request.get_json()
     note = data.get('message') if data else 'Empty note'
+
+    # Send task to the queue
     notification.send(note)
     return make_response({'message': 'The email has been sent'}, 201)
 
 @dramatiq.actor
-def notification(note):
+def task_handler(note):
     
     # Create a mail
     message = Mail(

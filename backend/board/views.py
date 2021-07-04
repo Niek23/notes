@@ -6,7 +6,7 @@ from .serializers import NoteSerializer
 
 class NoteViewSet(viewsets.ModelViewSet):
     """
-    API endpoint to get all notes 
+    API endpoint to notes
     """
     queryset = Note.objects.all()
     serializer_class = NoteSerializer

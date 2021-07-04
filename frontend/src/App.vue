@@ -29,14 +29,16 @@ export default {
   },
   methods: {
     loadNotes: function() {
-      axios.get('https://api.hellosend.cloud/api/notes/').then(
+      axios.get('https://api.hellosend.cloud/notes/').then(
         response => {
           this.notes = response.data;
         }
       );
     },
     addNote: function() {
-      axios.post('https://notifications.hellosend.cloud/create_notification', {message: this.newNote})
+      if (this.newNote != "") {
+        axios.post('https://notifications.hellosend.cloud/create_notification', {message: this.newNote})
+      }
       axios.post('https://api.hellosend.cloud/api/notes/', {text: this.newNote}).then(
         response => {
           this.newNote = "";
