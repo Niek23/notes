@@ -37,9 +37,12 @@ export default {
     },
     addNote: function() {
       if (this.newNote != "") {
-        axios.post('https://notifications.hellosend.cloud/create_notification', {message: this.newNote})
+        
         axios.post('https://api.hellosend.cloud/notes/', {text: this.newNote}).then(
         response => {
+          if (response.status == 201){
+            axios.post('https://notifications.hellosend.cloud/create_notification', {message: this.newNote})
+          }
           this.newNote = "";
           this.notes.push(response.data);
         }
