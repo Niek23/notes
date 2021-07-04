@@ -38,7 +38,7 @@ Run flask application
 ```
 flask run
 ```
-##POST 
+## POST 
 ### /create_notification
 
 Creates task to send email with a new note content. 
